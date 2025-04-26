@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <title>Mariely Ann Tolentino - Portfolio</title>
+     <link rel="icon" type="image/png" href="img/mariely.png">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="/index.html" class="logo">
+                    <img src="img/mariely.png" alt="M" class="logo-image">Mariely
+                    <span>Portfolio</span>
+                </a>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About Me</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#education">Education</a>
+                    <a href="#contacts">Contacts</a> 
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <div class="particles">
+                    <!-- Particles will be added by JavaScript -->
+                </div>
+            </div>
+        </nav>
+        <div class="menu-overlay"></div>
+    </header>
+    <!-- Home Section -->
+    <section id="home">
+        <div class="home-content">
+            <div class="home-text">
+                <h2>Hi there! I'm</h2>
+                <h1>Mariely Ann Tolentino</h1>
+                <p><span class="typing-container"><span class="typing-text">BSIT Student | Web Developer</span></span></p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/tolentinomariely" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/tolentinomariely/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@marielyann09" title="Tiktok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://github.com/mariely09" title="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+                <div class="resume-buttons">
+                    <a href="img/RESUME-MARIELY_TOLENTINO.pdf" class="resume-btn" target="_blank" title="View Resume">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="btn-text">Resume</span>
+                        <i class="fas fa-eye btn-icon"></i>
+                    </a>
+                    <a href="img/RESUME-MARIELY_TOLENTINO.pdf" class="download-btn" download title="Download Resume">
+                        <i class="fas fa-download"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="home-image">
+                <img src="img/mariely.png" alt="Mariely Tolentino">
+            </div>
+        </div>    
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="about-container">
+            <div class="about-header">
+                <h1>About <span>Me</span></h1>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="img/tolentino.png" alt="Mariely Tolentino">
+                </div>
+                
+                <div class="about-text">
+                    <p>Hi! My name is <span>Mariely Tolentino</span>. I am 20 years old, born on March 9, 2005, in Luisiana, Laguna. Currently, I am a second-year college student pursuing a Bachelor of Science in Information Technology (BS IT) at Laguna State Polytechnic University (LSPU).</p>
+                    
+                    <p>I chose this course because I have always been fascinated by technology and I enjoy learning about programming, web development, and software design. My goal is to become a skilled developer who can create innovative solutions to real-world problems.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">20</div>
+                            <div class="stat-label">Years Old</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2nd Year</div>
+                            <div class="stat-label">College Level</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">BSIT</div>
+                            <div class="stat-label">Course</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="skills-container">
+            <div class="skills-header">
+                <h1>My <span>Skills</span></h1>
+            </div>
+
+            <div class="skills-content">
+                <div class="skill-category">
+                    <div class="skill-card">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front">
+                                <h2><i class="fas fa-laptop-code"></i>Technical Skills</h2>
+                                <div class="flip-hint">Click to flip</div>
+                            </div>
+                            <div class="skill-card-back">
+                                <div class="skill-items-container">
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fab fa-html5"></i>
+                                                HTML5
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fab fa-css3-alt"></i>
+                                                CSS3
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fab fa-js"></i>
+                                                JavaScript
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fab fa-python"></i>
+                                                Python
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fab fa-java"></i>
+                                                Java
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fas fa-database"></i>
+                                                MySQL
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-card">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front">
+                                <h2><i class="fas fa-users"></i>Soft Skills</h2>
+                                <div class="flip-hint">Click to flip</div>
+                            </div>
+                            <div class="skill-card-back">
+                                <div class="skill-items-container">
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="far fa-clock"></i>
+                                                Time Management
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fas fa-comments"></i>
+                                                Communication Skills
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fas fa-tasks"></i>
+                                                Problem Solving
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fas fa-paint-brush"></i>
+                                                Creativity
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-card">
+                        <div class="skill-card-inner">
+                            <div class="skill-card-front">
+                                <h2><i class="fas fa-tools"></i>Tools & Technologies</h2>
+                                <div class="flip-hint">Click to flip</div>
+                            </div>
+                            <div class="skill-card-back">
+                                <div class="skill-items-container">
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fas fa-code"></i>
+                                                VS Code
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fab fa-figma"></i>
+                                                Figma
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fas fa-palette"></i>
+                                                Canva
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fab fa-github"></i>
+                                                GitHub
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="skill-item">
+                                        <div class="skill-info">
+                                            <span class="skill-name">
+                                                <i class="fab fa-android"></i>
+                                                Android Studio
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="projects-container">
+            <div class="projects-header">
+                <h1>My <span>Projects</span></h1>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="img/e-commerce-login.png" alt="Project 1">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-commerce Website</h3>
+                        <p class="project-description">A full-featured e-commerce platform with product catalog, shopping cart, and payment integration.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Bootstrap</span>
+                            <span class="project-tag">Python(Flask)</span>
+                            <span class="project-tag">SQLyog</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="img/todolist-login.jpg" alt="Project 2">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Todo List App/Website</h3>
+                        <p class="project-description">A productivity application for managing tasks, setting deadlines, and tracking progress.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">PHP</span>
+                            <span class="project-tag">MySQL</span>
+                            <span class="project-tag">Firebase</span>
+                            <span class="project-tag">Android Studio</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="img/lms-login.jpg" alt="Project 3">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Library Management System</h3>
+                        <p class="project-description">A comprehensive system for managing library operations including book inventory, member management, and borrowing records.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Java</span>
+                            <span class="project-tag">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="education-container">
+            <div class="education-header">
+                <h1>Educational <span>Background</span></h1>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2011 - 2017</div>
+                        <div class="timeline-title">Elementary Education</div>
+                        <div class="timeline-school">Bonifacio Elementary School</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2017 - 2021</div>
+                        <div class="timeline-title">High School</div>
+                        <div class="timeline-school">Liceo de Luisiana</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021 - 2023</div>
+                        <div class="timeline-title">Senior High School</div>
+                        <div class="timeline-school">Liceo de Luisiana</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023 - Present</div>
+                        <div class="timeline-title">College</div>
+                        <div class="timeline-school">Laguna State Polytechnic University</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contacts Section -->
+    <section id="contacts">
+        <div class="contacts-container">
+            <div class="contacts-header">
+                <h1>Get In <span>Touch</span></h1>
+                <p>Feel free to reach out to me for any inquiries or opportunities</p>
+            </div>
+
+            <div class="contacts-content">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h2>Location</h2>
+                        <p>Ibañez Street Brgy. San Diego<br>Luisiana, Laguna</p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h2>Phone</h2>
+                        <p>+63 967 975 7728</p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-info">
+                        <h2>Email</h2>
+                        <p>tolentinomariely09@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-container">
+                <h2>Send Me a Message</h2>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="img/mariely.png" alt="Mariely" class="footer-logo-image">
+                    <h3>Mariely Ann Tolentino</h3>
+                    <p>A passionate IT student with a love for technology and learning. Always striving to create meaningful and innovative solutions.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/tolentinomariely" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/tolentinomariely/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@marielyann09" title="Tiktok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://github.com/mariely09" title="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                    <li><a href="#skills"><i class="fas fa-chevron-right"></i> Skills</a></li>
+                    <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
+                    <li><a href="#education"><i class="fas fa-chevron-right"></i> Education</a></li>
+                    <li><a href="#contacts"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 <span>Mariely Ann Tolentino</span>. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
