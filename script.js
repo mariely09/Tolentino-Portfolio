@@ -293,5 +293,105 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Add current year to footer
-document.querySelector('.footer-text').innerHTML = `&copy; ${new Date().getFullYear()} <span>Mariely</span>. All Rights Reserved.`;
+// Add current year to footer (only if element exists)
+const footerText = document.querySelector('.footer-text');
+if (footerText) {
+    footerText.innerHTML = `&copy; ${new Date().getFullYear()} <span>Mariely</span>. All Rights Reserved.`;
+}
+
+// Image Modal Functionality
+function openImageModal(imageSrc, imageAlt) {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    
+    modalImage.src = imageSrc;
+    modalImage.alt = imageAlt || 'Full size image';
+    modal.classList.add('active');
+    
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+    const modal = document.getElementById('imageModal');
+    modal.classList.remove('active');
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+}
+
+// Add click event listeners to all images
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all images that should be clickable for modal viewing
+    const clickableImages = document.querySelectorAll('.home-image img, .about-image img, .project-image img, .certificate-image img');
+    
+    clickableImages.forEach(img => {
+        // Add click event for opening modal
+        img.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            openImageModal(img.src, img.alt);
+        });
+        
+        // Add keyboard accessibility
+        img.setAttribute('tabindex', '0');
+        img.setAttribute('role', 'button');
+        img.setAttribute('aria-label', 'Click to view full size image');
+        
+        img.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openImageModal(img.src, img.alt);
+            }
+        });
+        
+        // Add visual indicator that image is clickable
+        img.style.cursor = 'pointer';
+    });
+    
+    // Close modal when clicking outside the image
+    const imageModal = document.getElementById('imageModal');
+    if (imageModal) {
+        imageModal.addEventListener('click', (e) => {
+            if (e.target.classList.contains('image-modal')) {
+                closeImageModal();
+            }
+        });
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeImageModal();
+        }
+    });
+});
+
+// Add hover effect for desktop users
+document.addEventListener('DOMContentLoaded', () => {
+    const imageContainers = document.querySelectorAll('.home-image, .about-image, .project-image, .certificate-image');
+    
+    imageContainers.forEach(container => {
+        const img = container.querySelector('img');
+        
+        if (img) {
+            // Only add hover effects on non-touch devices
+            if (!('ontouchstart' in window)) {
+                container.addEventListener('mouseenter', () => {
+                    img.style.transform = 'scale(1.05)';
+                    img.style.filter = 'brightness(0.8)';
+                    img.style.transition = 'all 0.3s ease';
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                    img.style.transform = '';
+                    img.style.filter = '';
+                });
+            }
+            
+            // Add click indicator for all devices
+            container.style.position = 'relative';
+            container.style.cursor = 'pointer';
+        }
+    });
+});
