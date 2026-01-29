@@ -1,0 +1,66 @@
+<!-- FIXED EmailJS Email Template -->
+<!-- Copy this template structure into your EmailJS dashboard -->
+
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
+    <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #4a90e2;">
+            <h1 style="color: #2c3e50; margin: 0;">📧 New Contact Form Message</h1>
+            <p style="color: #666; margin: 5px 0 0 0;">From your portfolio website</p>
+        </div>
+        
+        <!-- IMPORTANT: Sender Information at the top (VERY VISIBLE) -->
+        <div style="background-color: #e3f2fd; padding: 25px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #4a90e2;">
+            <h2 style="color: #1976d2; margin: 0 0 15px 0; font-size: 20px;">👤 Message from: {{from_name}}</h2>
+            <div style="background-color: white; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                <p style="margin: 5px 0; color: #333; font-size: 16px;"><strong>📧 Sender's Email:</strong> <span style="color: #1976d2; font-weight: bold;">{{from_email}}</span></p>
+                <p style="margin: 5px 0; color: #333; font-size: 16px;"><strong>📝 Subject:</strong> {{subject}}</p>
+            </div>
+            <p style="margin: 10px 0 0 0; color: #666; font-size: 14px; font-style: italic;">
+                ⚠️ <strong>Important:</strong> Reply directly to this email to respond to {{from_name}} at {{from_email}}
+            </p>
+        </div>
+        
+        <!-- Message Content -->
+        <div style="margin-bottom: 25px;">
+            <h3 style="color: #4a90e2; font-size: 18px; margin-bottom: 15px;">💬 Message:</h3>
+            
+            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #e9ecef;">
+                <p style="margin: 0; line-height: 1.6; color: #333; white-space: pre-wrap; font-size: 15px;">{{message}}</p>
+            </div>
+        </div>
+        
+        <!-- Contact Summary -->
+        <div style="background-color: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ffc107;">
+            <h3 style="color: #856404; margin: 0 0 15px 0; font-size: 16px;">📋 Contact Summary:</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 8px 0; color: #856404; font-weight: bold; width: 30%;">Name:</td>
+                    <td style="padding: 8px 0; color: #333;">{{from_name}}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #856404; font-weight: bold;">Email:</td>
+                    <td style="padding: 8px 0; color: #333;">{{from_email}}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #856404; font-weight: bold;">Subject:</td>
+                    <td style="padding: 8px 0; color: #333;">{{subject}}</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Footer -->
+        <div style="text-align: center; padding-top: 20px; border-top: 1px solid #dee2e6;">
+            <p style="color: #888; font-size: 14px; margin: 0 0 10px 0;">
+                This message was sent from your portfolio contact form.
+            </p>
+            <div style="background-color: #d4edda; padding: 15px; border-radius: 5px; border: 1px solid #c3e6cb;">
+                <p style="color: #155724; font-size: 14px; margin: 0; font-weight: bold;">
+                    🔄 To reply: Click the "Reply" button and your response will go directly to {{from_email}}
+                </p>
+            </div>
+        </div>
+        
+    </div>
+</div>

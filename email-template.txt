@@ -1,29 +1,39 @@
-Subject: New Contact Form Message: {{subject}}
+Subject: New Message from {{from_name}} - {{subject}}
 
 ===========================================
-NEW CONTACT FORM MESSAGE
+📧 NEW PORTFOLIO MESSAGE
 ===========================================
 
-From: {{from_name}}
-Email: {{from_email}}
-Subject: {{subject}}
+FROM: {{from_name}}
+EMAIL: {{from_email}}
+SUBJECT: {{subject}}
 
-Message:
--------------------------------------------
+===========================================
+MESSAGE:
+===========================================
+
 {{message}}
--------------------------------------------
 
 ===========================================
-Contact Information:
+📞 CONTACT DETAILS:
 ===========================================
 Name: {{from_name}}
 Email: {{from_email}}
 Subject: {{subject}}
 
 ===========================================
+📋 QUICK ACTIONS:
+===========================================
+• Reply to this email to respond directly to {{from_name}}
+• Email address: {{from_email}}
+• Original subject: {{subject}}
+
+===========================================
+ℹ️  MESSAGE INFO:
+===========================================
+• Sent from: Portfolio Contact Form
+• Website: Mariely Ann Tolentino Portfolio
+• Sender: {{from_name}} ({{from_email}})
 
 This message was sent from your portfolio contact form.
 Reply directly to this email to respond to the sender.
-
-Portfolio Website Contact Form
-Mariely Ann Tolentino

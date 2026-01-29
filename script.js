@@ -111,7 +111,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 subject: formData.get('subject'),
                 message: formData.get('message'),
                 to_email: 'tolentinomariely09@gmail.com',
-                reply_to: formData.get('from_email')
+                reply_to: formData.get('from_email'),
+                // Additional info for better email identification
+                sender_name: formData.get('from_name'),
+                sender_email: formData.get('from_email'),
+                date: new Date().toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    timeZoneName: 'short'
+                })
             };
             
             // Validate form
