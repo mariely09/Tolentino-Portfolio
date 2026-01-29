@@ -86,70 +86,99 @@ projectCards.forEach(card => {
     });
 });
 
-// Form validation and submission
+// EmailJS Configuration and Form Handling
 document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('.contact-form');
+    // Initialize EmailJS with your public key
+    // IMPORTANT: Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS public key
+    emailjs.init('wW6DI4cjJ7VDymCOL');
+    
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formStatus = document.getElementById('form-status');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const loadingMessage = document.getElementById('loading-message');
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form values
-            const name = contactForm.querySelector('input[type="text"]').value.trim();
-            const email = contactForm.querySelector('input[type="email"]').value.trim();
-            const subject = contactForm.querySelector('input[placeholder="Subject"]').value.trim();
-            const message = contactForm.querySelector('textarea').value.trim();
+            // Get form data
+            const formData = new FormData(contactForm);
+            const templateParams = {
+                from_name: formData.get('from_name'),
+                from_email: formData.get('from_email'),
+                subject: formData.get('subject'),
+                message: formData.get('message'),
+                to_email: 'tolentinomariely09@gmail.com',
+                reply_to: formData.get('from_email')
+            };
             
             // Validate form
-            if (!validateForm(name, email, subject, message)) {
+            if (!validateForm(templateParams)) {
                 return;
             }
             
-            // Create form data object
-            const formData = {
-                name: name,
-                email: email,
-                subject: subject,
-                message: message
-            };
+            // Show loading state
+            showLoadingState();
             
-            // Here you would typically send the data to a server
-            // For now, we'll just show a success message
-            showSuccessMessage();
-            
-            // Reset form
-            contactForm.reset();
+            // Send email using EmailJS
+            // IMPORTANT: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual EmailJS service and template IDs
+            emailjs.send('service_ozdj74k', 'template_3nvtrjo', templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    showSuccessMessage();
+                    contactForm.reset();
+                    clearErrorStates();
+                })
+                .catch(function(error) {
+                    console.error('Email sending failed:', error);
+                    showErrorMessage(error);
+                })
+                .finally(function() {
+                    hideLoadingState();
+                });
         });
     }
     
     // Form validation function
-    function validateForm(name, email, subject, message) {
+    function validateForm(data) {
+        clearErrorStates();
         let isValid = true;
         
         // Name validation
-        if (name === '') {
-            showError('Please enter your name');
+        if (!data.from_name || data.from_name.trim() === '') {
+            showFieldError('name', 'Please enter your name');
+            isValid = false;
+        } else if (data.from_name.trim().length < 2) {
+            showFieldError('name', 'Name must be at least 2 characters long');
             isValid = false;
         }
         
         // Email validation
-        if (email === '') {
-            showError('Please enter your email');
+        if (!data.from_email || data.from_email.trim() === '') {
+            showFieldError('email', 'Please enter your email');
             isValid = false;
-        } else if (!isValidEmail(email)) {
-            showError('Please enter a valid email address');
+        } else if (!isValidEmail(data.from_email)) {
+            showFieldError('email', 'Please enter a valid email address');
             isValid = false;
         }
         
         // Subject validation
-        if (subject === '') {
-            showError('Please enter a subject');
+        if (!data.subject || data.subject.trim() === '') {
+            showFieldError('subject', 'Please enter a subject');
+            isValid = false;
+        } else if (data.subject.trim().length < 3) {
+            showFieldError('subject', 'Subject must be at least 3 characters long');
             isValid = false;
         }
         
         // Message validation
-        if (message === '') {
-            showError('Please enter your message');
+        if (!data.message || data.message.trim() === '') {
+            showFieldError('message', 'Please enter your message');
+            isValid = false;
+        } else if (data.message.trim().length < 10) {
+            showFieldError('message', 'Message must be at least 10 characters long');
             isValid = false;
         }
         
@@ -159,52 +188,118 @@ document.addEventListener('DOMContentLoaded', function() {
     // Email validation helper
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        return emailRegex.test(email.trim());
     }
     
-    // Show error message
-    function showError(message) {
-        // Remove any existing error messages
-        const existingError = document.querySelector('.error-message');
-        if (existingError) {
-            existingError.remove();
+    // Show field-specific error
+    function showFieldError(fieldName, message) {
+        const field = document.getElementById(fieldName);
+        if (field) {
+            field.classList.add('error');
+            
+            // Remove existing error message
+            const existingError = field.parentNode.querySelector('.field-error');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Create new error message
+            const errorElement = document.createElement('div');
+            errorElement.className = 'field-error';
+            errorElement.textContent = message;
+            
+            // Insert error message after the field
+            field.parentNode.appendChild(errorElement);
         }
-        
-        // Create and show new error message
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'error-message';
-        errorDiv.textContent = message;
-        
-        const formContainer = document.querySelector('.contact-form-container');
-        formContainer.insertBefore(errorDiv, formContainer.firstChild);
-        
-        // Remove error message after 3 seconds
-        setTimeout(() => {
-            errorDiv.remove();
-        }, 3000);
+    }
+    
+    // Clear error states
+    function clearErrorStates() {
+        const fields = ['name', 'email', 'subject', 'message'];
+        fields.forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            if (field) {
+                field.classList.remove('error');
+                
+                // Remove existing error messages
+                const errorElement = field.parentNode.querySelector('.field-error');
+                if (errorElement) {
+                    errorElement.remove();
+                }
+            }
+        });
+    }
+    
+    // Show loading state
+    function showLoadingState() {
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+        formStatus.style.display = 'block';
+        loadingMessage.style.display = 'flex';
+        successMessage.style.display = 'none';
+        errorMessage.style.display = 'none';
+    }
+    
+    // Hide loading state
+    function hideLoadingState() {
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        loadingMessage.style.display = 'none';
     }
     
     // Show success message
     function showSuccessMessage() {
-        // Remove any existing messages
-        const existingMessage = document.querySelector('.success-message');
-        if (existingMessage) {
-            existingMessage.remove();
+        formStatus.style.display = 'block';
+        successMessage.style.display = 'flex';
+        errorMessage.style.display = 'none';
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+            if (loadingMessage.style.display === 'none' && errorMessage.style.display === 'none') {
+                formStatus.style.display = 'none';
+            }
+        }, 5000);
+    }
+    
+    // Show error message
+    function showErrorMessage(error = null) {
+        formStatus.style.display = 'block';
+        errorMessage.style.display = 'flex';
+        successMessage.style.display = 'none';
+        
+        // Update error message text if specific error provided
+        if (error && error.text) {
+            const errorText = errorMessage.querySelector('span');
+            errorText.textContent = `Failed to send message: ${error.text}`;
         }
         
-        // Create and show success message
-        const successDiv = document.createElement('div');
-        successDiv.className = 'success-message';
-        successDiv.textContent = 'Message sent successfully! Thank you for contacting me.';
-        
-        const formContainer = document.querySelector('.contact-form-container');
-        formContainer.insertBefore(successDiv, formContainer.firstChild);
-        
-        // Remove success message after 3 seconds
+        // Auto-hide after 5 seconds
         setTimeout(() => {
-            successDiv.remove();
-        }, 3000);
+            errorMessage.style.display = 'none';
+            if (loadingMessage.style.display === 'none' && successMessage.style.display === 'none') {
+                formStatus.style.display = 'none';
+            }
+        }, 5000);
     }
+    
+    // Add real-time validation
+    const fields = ['name', 'email', 'subject', 'message'];
+    fields.forEach(fieldName => {
+        const field = document.getElementById(fieldName);
+        if (field) {
+            // Clear error on input
+            field.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    this.classList.remove('error');
+                    const fieldError = this.parentNode.querySelector('.field-error');
+                    if (fieldError) {
+                        fieldError.remove();
+                    }
+                }
+            });
+        }
+    });
 });
 
 // Skills Card Flip Animation
@@ -320,10 +415,10 @@ function closeImageModal() {
     document.body.style.overflow = '';
 }
 
-// Add click event listeners to all images
+// Add click event listeners to project and certificate images only
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all images that should be clickable for modal viewing
-    const clickableImages = document.querySelectorAll('.home-image img, .about-image img, .project-image img, .certificate-image img');
+    // Select only project and certificate images that should be clickable for modal viewing
+    const clickableImages = document.querySelectorAll('.project-image img, .certificate-image img');
     
     clickableImages.forEach(img => {
         // Add click event for opening modal
@@ -367,9 +462,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Add hover effect for desktop users
+// Add hover effect for project and certificate images only
 document.addEventListener('DOMContentLoaded', () => {
-    const imageContainers = document.querySelectorAll('.home-image, .about-image, .project-image, .certificate-image');
+    const imageContainers = document.querySelectorAll('.project-image, .certificate-image');
     
     imageContainers.forEach(container => {
         const img = container.querySelector('img');
@@ -389,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
             
-            // Add click indicator for all devices
+            // Add click indicator for clickable images only
             container.style.position = 'relative';
             container.style.cursor = 'pointer';
         }

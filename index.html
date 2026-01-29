@@ -7,6 +7,28 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
      <link rel="stylesheet" href="styles.css">
+     <!-- EmailJS SDK -->
+     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+     <script>
+         // Fallback check for EmailJS
+         window.addEventListener('load', function() {
+             if (typeof emailjs === 'undefined') {
+                 console.warn('EmailJS failed to load. Contact form will show fallback message.');
+                 // Show fallback message
+                 setTimeout(function() {
+                     const formContainer = document.querySelector('.contact-form-container');
+                     if (formContainer) {
+                         const fallbackDiv = document.createElement('div');
+                         fallbackDiv.className = 'error-message';
+                         fallbackDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>Contact form is temporarily unavailable. Please email directly to <a href="mailto:tolentinomariely09@gmail.com">tolentinomariely09@gmail.com</a></span>';
+                         fallbackDiv.style.display = 'flex';
+                         fallbackDiv.style.marginBottom = '20px';
+                         formContainer.insertBefore(fallbackDiv, formContainer.firstChild);
+                     }
+                 }, 1000);
+             }
+         });
+     </script>
 </head>
 <body>
     <!-- Header Section -->
@@ -528,21 +550,44 @@
 
             <div class="contact-form-container">
                 <h2>Send Me a Message</h2>
-                <form class="contact-form">
+                <form class="contact-form" id="contact-form">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                        <input type="text" id="name" name="from_name" placeholder=" " required>
+                        <label for="name">Your Name</label>
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
+                        <input type="email" id="email" name="from_email" placeholder=" " required>
+                        <label for="email">Your Email</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Subject" required>
+                        <input type="text" id="subject" name="subject" placeholder=" " required>
+                        <label for="subject">Subject</label>
                     </div>
                     <div class="form-group">
-                        <textarea placeholder="Your Message" required></textarea>
+                        <textarea id="message" name="message" placeholder=" " required></textarea>
+                        <label for="message">Your Message</label>
                     </div>
-                    <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span class="btn-text">Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
                 </form>
+                
+                <!-- Status messages -->
+                <div id="form-status" class="form-status" style="display: none;">
+                    <div id="success-message" class="success-message" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Message sent successfully! Thank you for contacting me.</span>
+                    </div>
+                    <div id="error-message" class="error-message" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Failed to send message. Please try again later.</span>
+                    </div>
+                    <div id="loading-message" class="loading-message" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Sending message...</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -592,5 +637,7 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="emailjs-config.js"></script>
+    <script src="emailjs-demo.js"></script>
 </body>
 </html>
