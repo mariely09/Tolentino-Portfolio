@@ -3,10 +3,10 @@
 <head>
      <meta charset="UTF-8">
      <title>Mariely Ann Tolentino - Portfolio</title>
-     <link rel="icon" type="image/png" href="img/mariely.png">
+     <link rel="icon" type="image/png" href="img/mylogo.png">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-     <link rel="stylesheet" href="styles.css">
+     <link rel="stylesheet" href="styles.css?v=7.0">
      <!-- EmailJS SDK -->
      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
      <script>
@@ -36,7 +36,7 @@
         <nav>
             <div class="nav-container">
                 <a href="#" class="logo">
-                    <img src="img/mariely.png" alt="M" class="logo-image">Mariely
+                    <img src="img/mylogo.png" alt="M" class="logo-image">Mariely
                     <span>Portfolio</span>
                 </a>
                 <div class="menu-toggle">
@@ -65,31 +65,39 @@
     </header>
     <!-- Home Section -->
     <section id="home">
+        <!-- Animated Particles Background -->
+        <div class="home-particles" id="homeParticles"></div>
+        
         <div class="home-content">
-            <div class="home-text">
-                <h2>Hi there! I'm</h2>
-                <h1>Mariely Ann Tolentino</h1>
-                <p><span class="typing-container"><span class="typing-text">BSIT Student | Web Developer</span></span></p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/tolentinomariely" title="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/tolentinomariely/" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.tiktok.com/@marielyann09" title="Tiktok"><i class="fab fa-tiktok"></i></a>
-                    <a href="https://www.linkedin.com/in/mariely-ann-tolentino-434a093a6/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/mariely09" title="GitHub"><i class="fab fa-github"></i></a>
+            <div class="home-hero-center">
+                <div class="name-background">
+                    <h1 class="hero-name hero-name-top">MARIELY</h1>
                 </div>
-                <div class="resume-buttons">
-                    <a href="img/RESUME-MARIELY_TOLENTINO.pdf" class="resume-btn" target="_blank" title="View Resume">
-                        <i class="fas fa-file-alt"></i>
-                        <span class="btn-text">Resume</span>
-                        <i class="fas fa-eye btn-icon"></i>
-                    </a>
-                    <a href="img/RESUME-MARIELY_TOLENTINO.pdf" class="download-btn" download title="Download Resume">
-                        <i class="fas fa-download"></i>
-                    </a>
+                <div class="hero-image-wrapper">
+                    <img src="img/mariely.png" alt="Mariely Tolentino" class="hero-photo">
+                </div>
+                <div class="name-background-bottom">
+                    <h1 class="hero-name hero-name-bottom">TOLENTINO</h1>
+                </div>
+                <div class="typing-info-left">
+                    <p><span class="typing-container">BSIT Student | <span class="typing-text" id="typing-text">Web Developer</span></span></p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/tolentinomariely" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/tolentinomariely/" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@marielyann09" title="Tiktok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.linkedin.com/in/mariely-ann-tolentino-434a093a6/" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/mariely09" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                    <div class="resume-buttons">
+                        <a href="img/TOLENTINO, MARIELY ANN_CV RESUME.pdf" class="resume-btn" target="_blank" title="View Resume">
+                            <i class="fas fa-file-alt"></i>
+                            <span class="btn-text">CV</span>
+                            <i class="fas fa-eye btn-icon"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="home-image">
-                <img src="img/mariely.png" alt="Mariely Tolentino">
+            <div class="home-bottom-section">
             </div>
         </div>    
     </section>
@@ -103,28 +111,17 @@
             
             <div class="about-content">
                 <div class="about-image">
-                    <img src="img/tolentino.png" alt="Mariely Tolentino">
+                    <div class="decoration-1"></div>
+                    <div class="decoration-2"></div>
+                    <div class="decoration-3"></div>
+                    <div class="image-reflection"></div>
+                    <img src="img/formalphoto.jpg" alt="Mariely Tolentino">
                 </div>
                 
                 <div class="about-text">
                     <p>Hi! My name is <span>Mariely Tolentino</span>. I am 20 years old, born on March 9, 2005, in Luisiana, Laguna. Currently, I am a third-year college student pursuing a Bachelor of Science in Information Technology (BSIT) at Laguna State Polytechnic University (LSPU).</p>
                     
                     <p>I chose this course because I have always been fascinated by technology and I enjoy learning about programming, web development, and software design. My goal is to become a skilled developer who can create innovative solutions to real-world problems.</p>
-                    
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">20</div>
-                            <div class="stat-label">Years Old</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">3rd Year</div>
-                            <div class="stat-label">College Level</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">BSIT</div>
-                            <div class="stat-label">Course</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -140,14 +137,14 @@
             <div class="skills-content">
                 <div class="skill-category">
                     <div class="skill-card">
-                        <div class="skill-card-inner">
-                            <div class="skill-card-front">
-                                <h2><i class="fas fa-laptop-code"></i>Technical Skills</h2>
-                                <div class="flip-hint">Click to flip</div>
-                            </div>
-                            <div class="skill-card-back">
+                        <h2 class="skill-card-header"><i class="fas fa-laptop-code"></i>Technical Skills</h2>
+                        <div class="skill-carousel-wrapper">
+                            <button class="carousel-btn carousel-prev" aria-label="Previous skill">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="skill-carousel">
                                 <div class="skill-items-container">
-                                    <div class="skill-item">
+                                    <div class="skill-item active">
                                         <div class="skill-info">
                                             <span class="skill-name">
                                                 <i class="fab fa-html5"></i>
@@ -211,20 +208,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="carousel-btn carousel-next" aria-label="Next skill">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
                         </div>
+                        <div class="carousel-indicators"></div>
                     </div>
                 </div>
 
                 <div class="skill-category">
                     <div class="skill-card">
-                        <div class="skill-card-inner">
-                            <div class="skill-card-front">
-                                <h2><i class="fas fa-users"></i>Soft Skills</h2>
-                                <div class="flip-hint">Click to flip</div>
-                            </div>
-                            <div class="skill-card-back">
+                        <h2 class="skill-card-header"><i class="fas fa-users"></i>Soft Skills</h2>
+                        <div class="skill-carousel-wrapper">
+                            <button class="carousel-btn carousel-prev" aria-label="Previous skill">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="skill-carousel">
                                 <div class="skill-items-container">
-                                    <div class="skill-item">
+                                    <div class="skill-item active">
                                         <div class="skill-info">
                                             <span class="skill-name">
                                                 <i class="far fa-clock"></i>
@@ -261,20 +262,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="carousel-btn carousel-next" aria-label="Next skill">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
                         </div>
+                        <div class="carousel-indicators"></div>
                     </div>
                 </div>
 
                 <div class="skill-category">
                     <div class="skill-card">
-                        <div class="skill-card-inner">
-                            <div class="skill-card-front">
-                                <h2><i class="fas fa-tools"></i>Tools & Technologies</h2>
-                                <div class="flip-hint">Click to flip</div>
-                            </div>
-                            <div class="skill-card-back">
+                        <h2 class="skill-card-header"><i class="fas fa-tools"></i>Tools & Technologies</h2>
+                        <div class="skill-carousel-wrapper">
+                            <button class="carousel-btn carousel-prev" aria-label="Previous skill">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="skill-carousel">
                                 <div class="skill-items-container">
-                                    <div class="skill-item">
+                                    <div class="skill-item active">
                                         <div class="skill-info">
                                             <span class="skill-name">
                                                 <i class="fas fa-code"></i>
@@ -320,7 +325,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <button class="carousel-btn carousel-next" aria-label="Next skill">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
                         </div>
+                        <div class="carousel-indicators"></div>
                     </div>
                 </div>
             </div>
@@ -336,8 +345,25 @@
 
             <div class="projects-grid">
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="img/e-commerce-login.png" alt="Project 1">
+                    <div class="project-image-carousel">
+                        <button class="project-carousel-btn project-prev" aria-label="Previous image">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="project-images">
+                            <div class="project-image active">
+                                <img src="img/e-commerce-login.png" alt="E-commerce Login">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/e-commerce-login.png" alt="E-commerce Products">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/e-commerce-login.png" alt="E-commerce Cart">
+                            </div>
+                        </div>
+                        <button class="project-carousel-btn project-next" aria-label="Next image">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="project-carousel-dots"></div>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">E-commerce Website</h3>
@@ -357,21 +383,59 @@
                     </div>
                 </div>
 
+                
+
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="img/todolist-login.jpg" alt="Project 2">
+                    <div class="project-image-carousel">
+                        <button class="project-carousel-btn project-prev" aria-label="Previous image">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="project-images">
+                            <div class="project-image active">
+                                <img src="img/lms_homepage.jpg" alt="Library System Homepage">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_signin.jpg" alt="Library System Sign In">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_signup.jpg" alt="Library System Sign Up">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_guestlogin.jpg" alt="Library System Guest Login">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_managebooks.jpg" alt="Library System Manage Books">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_viewbooks.jpg" alt="Library System View Books">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_issuebooks.jpg" alt="Library System Issue Books">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_returnbooks.jpg" alt="Library System Return Books">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_managestudents.jpg" alt="Library System Manage Students">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_viewrecords.jpg" alt="Library System View Records">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/lms_forgotpass.jpg" alt="Library System Forgot Password">
+                            </div>
+                        </div>
+                        <button class="project-carousel-btn project-next" aria-label="Next image">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="project-carousel-dots"></div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Todo List App/Website</h3>
-                        <p class="project-description">A productivity application for managing tasks, setting deadlines, and tracking progress.</p>
+                        <h3 class="project-title">Library Management System</h3>
+                        <p class="project-description">A comprehensive system for managing library operations including book inventory, member management, and borrowing records.</p>
                         <div class="project-tags">
-                            <span class="project-tag">HTML5</span>
-                            <span class="project-tag">CSS3</span>
-                            <span class="project-tag">JavaScript</span>
-                            <span class="project-tag">PHP</span>
+                            <span class="project-tag">Java</span>
                             <span class="project-tag">MySQL</span>
-                            <span class="project-tag">Firebase</span>
-                            <span class="project-tag">Android Studio</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
@@ -381,15 +445,141 @@
                 </div>
 
                 <div class="project-card">
-                    <div class="project-image">
-                        <img src="img/lms-login.jpg" alt="Project 3">
+                    <div class="project-image-carousel">
+                        <button class="project-carousel-btn project-prev" aria-label="Previous image">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="project-images">
+                            <div class="project-image active">
+                                <img src="img/sanbenito_landingpage.png" alt="San Benito Landing Page">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_signin.png" alt="San Benito Sign In">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_signup.png" alt="San Benito Sign Up">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_admindash.png" alt="San Benito Admin Dashboard">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_residentsdash.png" alt="San Benito Residents Dashboard">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_residents.png" alt="San Benito Residents Management">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_appoinments.png" alt="San Benito Appointments">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_babies.png" alt="San Benito Babies Records">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_vaccinations.png" alt="San Benito Vaccinations">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_medicine.png" alt="San Benito Medicine Inventory">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_usersmanagement.png" alt="San Benito Users Management">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_reports.png" alt="San Benito Reports">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/sanbenito_archives.png" alt="San Benito Archives">
+                            </div>
+                        </div>
+                        <button class="project-carousel-btn project-next" aria-label="Next image">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="project-carousel-dots"></div>
                     </div>
                     <div class="project-content">
-                        <h3 class="project-title">Library Management System</h3>
-                        <p class="project-description">A comprehensive system for managing library operations including book inventory, member management, and borrowing records.</p>
+                        <h3 class="project-title">San Benito Health Center Management System</h3>
+                        <p class="project-description">A comprehensive health center management system for patient records, appointments, medical history, and staff management with secure data handling.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Java</span>
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">PHP</span>
                             <span class="project-tag">MySQL</span>
+                            <span class="project-tag">Bootstrap</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image-carousel">
+                        <button class="project-carousel-btn project-prev" aria-label="Previous image">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="project-images">
+                            <div class="project-image active">
+                                <img src="img/librarysystem_landingpage.png" alt="LDL Library Landing Page">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_homepage.png" alt="LDL Library Homepage">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_login.png" alt="LDL Library Login">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_register.png" alt="LDL Library Register">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_guestlogin.png" alt="LDL Library Guest Login">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_forgotpass.png" alt="LDL Library Forgot Password">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_managebooks.png" alt="LDL Library Manage Books">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_viewbooks.png" alt="LDL Library View Books">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_borrowbooks.png" alt="LDL Library Borrow Books">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_returnbooks.png" alt="LDL Library Return Books">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_managestudents.png" alt="LDL Library Manage Students">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_manageusers.png" alt="LDL Library Manage Users">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_viewusers.png" alt="LDL Library View Users">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_transactionrecords.png" alt="LDL Library Transaction Records">
+                            </div>
+                            <div class="project-image">
+                                <img src="img/librarysystem_archive.png" alt="LDL Library Archive">
+                            </div>
+                        </div>
+                        <button class="project-carousel-btn project-next" aria-label="Next image">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <div class="project-carousel-dots"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">LDL Library Management System</h3>
+                        <p class="project-description">A web-based library management system built with PHP for managing book inventory, member registration, borrowing transactions, and generating reports.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">PHP</span>
+                            <span class="project-tag">MySQL</span>
+                            <span class="project-tag">Bootstrap</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link"><i class="fas fa-link"></i> Live Demo</a>
@@ -628,11 +818,22 @@
         </div>
     </footer>
 
-    <!-- Image Modal -->
+    <!-- Image Modal with Carousel -->
     <div class="image-modal" id="imageModal">
         <div class="image-modal-content">
             <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
-            <img id="modalImage" src="" alt="Full size image">
+            <button class="modal-carousel-btn modal-prev" id="modalPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="modal-image-container">
+                <img id="modalImage" src="" alt="Full size image">
+                <div class="modal-image-info">
+                    <span id="modalImageCounter"></span>
+                </div>
+            </div>
+            <button class="modal-carousel-btn modal-next" id="modalNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 

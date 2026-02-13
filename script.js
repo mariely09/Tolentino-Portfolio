@@ -20,6 +20,80 @@ function toggleTheme() {
     localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
 }
 
+// Enhanced Dynamic Typing Effect
+class TypeWriter {
+    constructor(element, words, wait = 3000) {
+        this.element = element;
+        this.words = words;
+        this.wait = parseInt(wait, 10);
+        this.wordIndex = 0;
+        this.txt = '';
+        this.isDeleting = false;
+        this.typeSpeed = 100;
+        this.deleteSpeed = 50;
+        this.pauseTime = 1500;
+        this.type();
+    }
+
+    type() {
+        const current = this.wordIndex % this.words.length;
+        const fullTxt = this.words[current];
+
+        if (this.isDeleting) {
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+            this.element.classList.add('deleting');
+            this.element.classList.remove('typing');
+        } else {
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+            this.element.classList.add('typing');
+            this.element.classList.remove('deleting');
+        }
+
+        this.element.textContent = this.txt;
+
+        let typeSpeed = this.isDeleting ? this.deleteSpeed : this.typeSpeed;
+
+        // Add some randomness to typing speed for more natural feel
+        if (!this.isDeleting) {
+            typeSpeed += Math.random() * 50;
+        }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+            typeSpeed = this.pauseTime;
+            this.isDeleting = true;
+            this.element.classList.remove('typing');
+        } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.wordIndex++;
+            typeSpeed = 500;
+            this.element.classList.remove('deleting');
+        }
+
+        setTimeout(() => this.type(), typeSpeed);
+    }
+}
+
+// Initialize typing effect when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const typingElement = document.getElementById('typing-text');
+    if (typingElement) {
+        const words = [
+            'Web Developer',
+            'UI/UX Designer', 
+        ];
+        new TypeWriter(typingElement, words, 2000);
+    }
+    
+    // ID Card Animation Trigger
+    const idCardContainer = document.querySelector('.id-card-container');
+    if (idCardContainer) {
+        // Add landed class after the fall animation completes (2s + 1.2s delay = 3.2s)
+        setTimeout(() => {
+            idCardContainer.classList.add('landed');
+        }, 3200);
+    }
+});
+
 // Check for saved theme preference
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('darkMode');
@@ -313,27 +387,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Skills Card Flip Animation
+// Skills Carousel - Auto-initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     const skillCards = document.querySelectorAll('.skill-card');
     
     skillCards.forEach(card => {
-        // Add click event for all devices
-        card.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.classList.toggle('flipped');
-        });
+        // Initialize carousel immediately
+        const carousel = card.querySelector('.skill-carousel');
+        if (carousel && !carousel.dataset.initialized) {
+            initializeCarousel(carousel);
+        }
         
         // Add skill items animation
         const skillItems = card.querySelectorAll('.skill-item');
         skillItems.forEach((item, index) => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
             item.style.transition = `opacity 0.3s ease ${index * 0.1}s, transform 0.3s ease ${index * 0.1}s`;
         });
         
-        // Show skill items when card is flipped
+        // Show skill items when card is visible
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -343,11 +414,187 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
         
         observer.observe(card);
     });
 });
+
+// Carousel functionality
+function initializeCarousel(carouselElement) {
+    const card = carouselElement.closest('.skill-card');
+    const items = carouselElement.querySelectorAll('.skill-item');
+    const prevBtn = card.querySelector('.carousel-prev');
+    const nextBtn = card.querySelector('.carousel-next');
+    const indicatorsContainer = card.querySelector('.carousel-indicators');
+    
+    if (!items || items.length === 0) {
+        console.warn('No skill items found in carousel');
+        return;
+    }
+    
+    if (!prevBtn || !nextBtn || !indicatorsContainer) {
+        console.warn('Carousel controls not found');
+        return;
+    }
+    
+    let currentIndex = 0;
+    let autoPlayInterval;
+    
+    // Create indicators
+    items.forEach((_, index) => {
+        const indicator = document.createElement('button');
+        indicator.className = 'carousel-indicator';
+        indicator.setAttribute('aria-label', `Go to skill ${index + 1}`);
+        if (index === 0) indicator.classList.add('active');
+        indicator.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToSlide(index);
+            resetAutoPlay();
+        });
+        indicatorsContainer.appendChild(indicator);
+    });
+    
+    const indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
+    
+    // Update carousel display
+    function updateCarousel(direction = 'next') {
+        items.forEach((item, index) => {
+            item.classList.remove('active', 'prev', 'next');
+            
+            if (index === currentIndex) {
+                item.classList.add('active');
+            } else if (direction === 'next') {
+                if (index < currentIndex) {
+                    item.classList.add('prev');
+                } else {
+                    item.classList.add('next');
+                }
+            } else {
+                if (index > currentIndex) {
+                    item.classList.add('next');
+                } else {
+                    item.classList.add('prev');
+                }
+            }
+        });
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentIndex);
+        });
+    }
+    
+    // Go to specific slide
+    function goToSlide(index) {
+        const direction = index > currentIndex ? 'next' : 'prev';
+        currentIndex = index;
+        updateCarousel(direction);
+    }
+    
+    // Next slide
+    function nextSlide() {
+        const direction = 'next';
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel(direction);
+    }
+    
+    // Previous slide
+    function prevSlide() {
+        const direction = 'prev';
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateCarousel(direction);
+    }
+    
+    // Auto play
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    }
+    
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
+    function resetAutoPlay() {
+        stopAutoPlay();
+        startAutoPlay();
+    }
+    
+    // Event listeners
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            prevSlide();
+            resetAutoPlay();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            nextSlide();
+            resetAutoPlay();
+        });
+    }
+    
+    // Pause on hover
+    carouselElement.addEventListener('mouseenter', stopAutoPlay);
+    carouselElement.addEventListener('mouseleave', startAutoPlay);
+    
+    // Touch support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carouselElement.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoPlay();
+    }, { passive: true });
+    
+    carouselElement.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoPlay();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+    }
+    
+    // Keyboard navigation
+    card.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevSlide();
+            resetAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            nextSlide();
+            resetAutoPlay();
+        }
+    });
+    
+    // Initialize
+    updateCarousel();
+    startAutoPlay();
+    
+    // Mark as initialized
+    carouselElement.dataset.initialized = 'true';
+    
+    console.log(`Carousel initialized with ${items.length} items`);
+}
 
 // Enhanced Menu Toggle Functionality
 document.addEventListener('DOMContentLoaded', () => {
@@ -405,17 +652,67 @@ if (footerText) {
     footerText.innerHTML = `&copy; ${new Date().getFullYear()} <span>Mariely</span>. All Rights Reserved.`;
 }
 
-// Image Modal Functionality
-function openImageModal(imageSrc, imageAlt) {
+// Image Modal Functionality with Carousel
+let modalImages = [];
+let currentModalIndex = 0;
+
+function openImageModal(imageSrc, imageAlt, allImages = null) {
     const modal = document.getElementById('imageModal');
     const modalImage = document.getElementById('modalImage');
+    const modalCounter = document.getElementById('modalImageCounter');
+    const modalPrev = document.getElementById('modalPrev');
+    const modalNext = document.getElementById('modalNext');
     
-    modalImage.src = imageSrc;
-    modalImage.alt = imageAlt || 'Full size image';
+    // If allImages array is provided, use it for carousel
+    if (allImages && allImages.length > 0) {
+        modalImages = allImages;
+        currentModalIndex = allImages.findIndex(img => img.src === imageSrc);
+        if (currentModalIndex === -1) currentModalIndex = 0;
+    } else {
+        // Single image mode
+        modalImages = [{ src: imageSrc, alt: imageAlt }];
+        currentModalIndex = 0;
+    }
+    
+    updateModalImage();
     modal.classList.add('active');
     
     // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
+    
+    // Show/hide navigation buttons
+    if (modalImages.length > 1) {
+        modalPrev.style.display = 'flex';
+        modalNext.style.display = 'flex';
+    } else {
+        modalPrev.style.display = 'none';
+        modalNext.style.display = 'none';
+    }
+}
+
+function updateModalImage() {
+    const modalImage = document.getElementById('modalImage');
+    const modalCounter = document.getElementById('modalImageCounter');
+    const modalPrev = document.getElementById('modalPrev');
+    const modalNext = document.getElementById('modalNext');
+    
+    if (modalImages.length === 0) return;
+    
+    const currentImage = modalImages[currentModalIndex];
+    modalImage.src = currentImage.src;
+    modalImage.alt = currentImage.alt || 'Full size image';
+    
+    // Update counter
+    if (modalImages.length > 1) {
+        modalCounter.textContent = `${currentModalIndex + 1} / ${modalImages.length}`;
+        modalCounter.style.display = 'block';
+    } else {
+        modalCounter.style.display = 'none';
+    }
+    
+    // Update button states
+    modalPrev.disabled = currentModalIndex === 0;
+    modalNext.disabled = currentModalIndex === modalImages.length - 1;
 }
 
 function closeImageModal() {
@@ -424,22 +721,79 @@ function closeImageModal() {
     
     // Restore body scroll
     document.body.style.overflow = '';
+    
+    // Reset
+    modalImages = [];
+    currentModalIndex = 0;
+}
+
+function nextModalImage() {
+    if (currentModalIndex < modalImages.length - 1) {
+        currentModalIndex++;
+        updateModalImage();
+    }
+}
+
+function prevModalImage() {
+    if (currentModalIndex > 0) {
+        currentModalIndex--;
+        updateModalImage();
+    }
 }
 
 // Add click event listeners to project and certificate images only
 document.addEventListener('DOMContentLoaded', () => {
-    // Select only project and certificate images that should be clickable for modal viewing
-    const clickableImages = document.querySelectorAll('.project-image img, .certificate-image img');
+    // Handle project carousel images
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+        const carouselImages = card.querySelectorAll('.project-image img');
+        
+        carouselImages.forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Get all images from this project
+                const allProjectImages = Array.from(carouselImages).map(image => ({
+                    src: image.src,
+                    alt: image.alt
+                }));
+                
+                openImageModal(img.src, img.alt, allProjectImages);
+            });
+            
+            // Add keyboard accessibility
+            img.setAttribute('tabindex', '0');
+            img.setAttribute('role', 'button');
+            img.setAttribute('aria-label', 'Click to view full size image');
+            
+            img.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    
+                    const allProjectImages = Array.from(carouselImages).map(image => ({
+                        src: image.src,
+                        alt: image.alt
+                    }));
+                    
+                    openImageModal(img.src, img.alt, allProjectImages);
+                }
+            });
+            
+            // Add visual indicator that image is clickable
+            img.style.cursor = 'pointer';
+        });
+    });
     
-    clickableImages.forEach(img => {
-        // Add click event for opening modal
+    // Handle certificate images (single image mode)
+    const certificateImages = document.querySelectorAll('.certificate-image img');
+    certificateImages.forEach(img => {
         img.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             openImageModal(img.src, img.alt);
         });
         
-        // Add keyboard accessibility
         img.setAttribute('tabindex', '0');
         img.setAttribute('role', 'button');
         img.setAttribute('aria-label', 'Click to view full size image');
@@ -451,9 +805,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Add visual indicator that image is clickable
         img.style.cursor = 'pointer';
     });
+    
+    // Modal navigation button events
+    const modalPrev = document.getElementById('modalPrev');
+    const modalNext = document.getElementById('modalNext');
+    
+    if (modalPrev) {
+        modalPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevModalImage();
+        });
+    }
+    
+    if (modalNext) {
+        modalNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextModalImage();
+        });
+    }
     
     // Close modal when clicking outside the image
     const imageModal = document.getElementById('imageModal');
@@ -465,10 +836,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Close modal with Escape key
+    // Keyboard navigation for modal
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeImageModal();
+        const modal = document.getElementById('imageModal');
+        if (modal && modal.classList.contains('active')) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            } else if (e.key === 'ArrowLeft') {
+                prevModalImage();
+            } else if (e.key === 'ArrowRight') {
+                nextModalImage();
+            }
         }
     });
 });
@@ -499,5 +877,319 @@ document.addEventListener('DOMContentLoaded', () => {
             container.style.position = 'relative';
             container.style.cursor = 'pointer';
         }
+    });
+});
+
+
+// Particle Background Animation
+document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    createHomeParticles();
+});
+
+function createParticles() {
+    const particlesContainer = document.querySelector('.particles');
+    if (!particlesContainer) {
+        // Create particles container if it doesn't exist
+        const container = document.createElement('div');
+        container.className = 'particles';
+        document.body.appendChild(container);
+    }
+    
+    const container = document.querySelector('.particles');
+    const particleCount = 50; // Number of particles
+    
+    for (let i = 0; i < particleCount; i++) {
+        createParticle(container);
+    }
+}
+
+function createParticle(container) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    
+    // Random size between 2px and 6px
+    const size = Math.random() * 4 + 2;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    
+    // Random starting position
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    
+    // Random animation duration between 10s and 30s
+    const duration = Math.random() * 20 + 10;
+    particle.style.animationDuration = `${duration}s`;
+    
+    // Random animation delay
+    const delay = Math.random() * 5;
+    particle.style.animationDelay = `${delay}s`;
+    
+    // Random opacity
+    const opacity = Math.random() * 0.5 + 0.3;
+    particle.style.opacity = opacity;
+    
+    container.appendChild(particle);
+    
+    // Remove and recreate particle after animation ends
+    particle.addEventListener('animationiteration', () => {
+        particle.style.left = `${Math.random() * 100}%`;
+    });
+}
+
+// Enhanced Home Section Particles
+function createHomeParticles() {
+    const homeParticlesContainer = document.getElementById('homeParticles');
+    if (!homeParticlesContainer) return;
+    
+    const particleCount = 60; // Number of particles for home section
+    
+    // Create particles with varied properties
+    for (let i = 0; i < particleCount; i++) {
+        createHomeParticle(homeParticlesContainer, i);
+    }
+    
+    // Continuously add new particles
+    setInterval(() => {
+        if (homeParticlesContainer.children.length < particleCount) {
+            createHomeParticle(homeParticlesContainer, Math.random() * particleCount);
+        }
+    }, 3000);
+}
+
+function createHomeParticle(container, index) {
+    const particle = document.createElement('div');
+    particle.className = 'home-particle';
+    
+    // Random size between 3px and 12px
+    const size = Math.random() * 9 + 3;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    
+    // Random starting position (X axis)
+    const startX = Math.random() * 100;
+    const midX = startX + (Math.random() * 60 - 30); // Move left or right
+    const endX = midX + (Math.random() * 60 - 30);
+    
+    // Set CSS custom properties for animation
+    particle.style.setProperty('--start-x', `${startX}vw`);
+    particle.style.setProperty('--mid-x', `${midX}vw`);
+    particle.style.setProperty('--end-x', `${endX}vw`);
+    
+    // Random animation duration between 15s and 35s
+    const duration = Math.random() * 20 + 15;
+    particle.style.setProperty('--duration', `${duration}s`);
+    
+    // Random animation delay
+    const delay = Math.random() * 10;
+    particle.style.animationDelay = `${delay}s`;
+    
+    // Random opacity
+    const opacity = Math.random() * 0.6 + 0.3;
+    particle.style.setProperty('--opacity', opacity);
+    
+    // Random scale
+    const scale = Math.random() * 0.5 + 0.8;
+    particle.style.setProperty('--scale', scale);
+    
+    // Random colors with blue theme
+    const colors = [
+        'rgba(74, 144, 226, 0.8)',
+        'rgba(52, 152, 219, 0.7)',
+        'rgba(100, 149, 237, 0.8)',
+        'rgba(30, 144, 255, 0.7)',
+        'rgba(135, 186, 245, 0.8)',
+        'rgba(65, 105, 225, 0.7)'
+    ];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    particle.style.background = `radial-gradient(circle, ${color} 0%, ${color.replace('0.8', '0.4').replace('0.7', '0.3')} 50%, transparent 100%)`;
+    
+    // Add glow effect to some particles
+    if (Math.random() > 0.7) {
+        particle.style.animation += ', particleGlow 3s ease-in-out infinite';
+    }
+    
+    container.appendChild(particle);
+    
+    // Remove particle after animation completes
+    setTimeout(() => {
+        if (particle.parentNode === container) {
+            container.removeChild(particle);
+        }
+    }, (duration + delay) * 1000);
+}
+
+// Add more particles on window resize
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        const container = document.querySelector('.particles');
+        if (container && container.children.length < 30) {
+            for (let i = 0; i < 10; i++) {
+                createParticle(container);
+            }
+        }
+        
+        // Recreate home particles on resize
+        const homeContainer = document.getElementById('homeParticles');
+        if (homeContainer && homeContainer.children.length < 40) {
+            for (let i = 0; i < 10; i++) {
+                createHomeParticle(homeContainer, i);
+            }
+        }
+    }, 250);
+});
+
+
+// Project Image Carousel
+document.addEventListener('DOMContentLoaded', () => {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    projectCards.forEach(card => {
+        const carousel = card.querySelector('.project-image-carousel');
+        if (!carousel) return;
+        
+        const images = carousel.querySelectorAll('.project-image');
+        const prevBtn = carousel.querySelector('.project-prev');
+        const nextBtn = carousel.querySelector('.project-next');
+        const dotsContainer = carousel.querySelector('.project-carousel-dots');
+        
+        if (images.length === 0) return;
+        
+        let currentIndex = 0;
+        let autoPlayInterval;
+        
+        // Create dots
+        images.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'project-carousel-dot';
+            dot.setAttribute('aria-label', `Go to image ${index + 1}`);
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                goToSlide(index);
+                resetAutoPlay();
+            });
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = dotsContainer.querySelectorAll('.project-carousel-dot');
+        
+        // Initialize - make sure only first image is active
+        images.forEach((img, index) => {
+            img.classList.remove('active');
+        });
+        images[0].classList.add('active');
+        
+        // Update carousel display
+        function updateCarousel() {
+            console.log(`Carousel update: showing image ${currentIndex + 1} of ${images.length}`);
+            
+            // Remove active class from all images
+            images.forEach((img, index) => {
+                img.classList.remove('active');
+            });
+            
+            // Add active class to current image
+            images[currentIndex].classList.add('active');
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active');
+            });
+            dots[currentIndex].classList.add('active');
+        }
+        
+        // Go to specific slide
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+        
+        // Next slide
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateCarousel();
+        }
+        
+        // Previous slide
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateCarousel();
+        }
+        
+        // Auto play
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 4000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+            }
+        }
+        
+        function resetAutoPlay() {
+            stopAutoPlay();
+            startAutoPlay();
+        }
+        
+        // Event listeners
+        if (prevBtn) {
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                prevSlide();
+                resetAutoPlay();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                nextSlide();
+                resetAutoPlay();
+            });
+        }
+        
+        // Pause on hover
+        carousel.addEventListener('mouseenter', stopAutoPlay);
+        carousel.addEventListener('mouseleave', startAutoPlay);
+        
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoPlay();
+        }, { passive: true });
+        
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoPlay();
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+        
+        // Initialize
+        updateCarousel();
+        startAutoPlay();
+        
+        console.log(`Project carousel initialized with ${images.length} images`);
     });
 });
